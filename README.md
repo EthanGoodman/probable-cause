@@ -18,7 +18,14 @@ _TBD._ In short: structured accident data lives in Postgres for counts and filte
 
 ## Quickstart
 
-_TBD._
+Prerequisites: [Docker](https://docs.docker.com/get-docker/) and [uv](https://docs.astral.sh/uv/). uv installs the right Python version for you.
+
+```bash
+cp .env.example .env      # then set POSTGRES_PASSWORD (and API keys when needed)
+docker compose up -d      # start Postgres 16 + pgvector
+uv sync                   # create .venv and install dependencies
+uv run pytest             # run tests
+```
 
 ## Evaluation
 
