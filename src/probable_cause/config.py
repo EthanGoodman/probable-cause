@@ -17,7 +17,9 @@ class Settings(BaseSettings):
     postgres_user: str = "probable_cause"
     postgres_password: SecretStr
     postgres_db: str = "probable_cause"
-    postgres_host: str = "localhost"
+    # 127.0.0.1, not "localhost": on Windows, localhost tries IPv6 (::1) first, and the
+    # container only listens on IPv4, so the connection hangs.
+    postgres_host: str = "127.0.0.1"
     postgres_port: int = 5432
 
     # Embeddings

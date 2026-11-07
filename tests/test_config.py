@@ -17,7 +17,7 @@ def test_database_url_built_from_parts(monkeypatch: pytest.MonkeyPatch) -> None:
 
     settings = Settings(_env_file=None)
 
-    expected = "postgresql://probable_cause:secret@localhost:5433/probable_cause"
+    expected = "postgresql://probable_cause:secret@127.0.0.1:5433/probable_cause"
     assert settings.database_url == expected
 
 
