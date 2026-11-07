@@ -1,0 +1,37 @@
+[project]
+name = "probable-cause"
+version = "0.1.0"
+description = "Agentic RAG system over NTSB aviation accident data."
+readme = "README.md"
+license = "MIT"
+authors = [{ name = "Ethan Goodman" }]
+requires-python = ">=3.11"
+# Only what is used today. Each ticket adds its own dependencies with `uv add`.
+dependencies = [
+    "pgvector>=0.3",
+    "psycopg[binary]>=3.2",
+    "pydantic-settings>=2.5",
+]
+
+[dependency-groups]
+dev = [
+    "pytest>=8.3",
+    "ruff>=0.8",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+# E/F: pycodestyle + pyflakes basics, I: import sorting,
+# UP: modern Python syntax, B: common bug patterns.
+select = ["E", "F", "I", "UP", "B"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra"
