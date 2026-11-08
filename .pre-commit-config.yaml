@@ -1,0 +1,35 @@
+# Git hooks managed by pre-commit (https://pre-commit.com).
+# One-time setup after cloning:  uv run pre-commit install
+#
+# Hooks call tools through `uv run`, so they use the exact versions pinned in
+# uv.lock (the same ones CI uses). `--frozen` stops uv from touching the lockfile.
+
+# `pre-commit install` sets up both hook types.
+default_install_hook_types: [pre-commit, pre-push]
+# Hooks run on commit unless they say otherwise.
+default_stages: [pre-commit]
+
+repos:
+  - repo: local
+    hooks:
+      # Lint first (with auto-fix), then format, as ruff recommends.
+      - id: ruff-check
+        name: ruff check
+        entry: uv run --frozen ruff check --fix --force-exclude
+        language: system
+        types_or: [python, pyi]
+
+      - id: ruff-format
+        name: ruff format
+        entry: uv run --frozen ruff format --force-exclude
+        language: system
+        types_or: [python, pyi]
+
+      # Tests run on `git push` rather than every commit.
+      - id: pytest
+        name: pytest
+        entry: uv run --frozen pytest
+        language: system
+        pass_filenames: false
+        always_run: true
+        stages: [pre-push]

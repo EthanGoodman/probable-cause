@@ -26,6 +26,7 @@ Prerequisites: [Docker](https://docs.docker.com/get-docker/) and [uv](https://do
 cp .env.example .env      # then set POSTGRES_PASSWORD (and API keys when needed)
 docker compose up -d      # start Postgres 16 + pgvector
 uv sync                   # create .venv and install dependencies
+uv run pre-commit install # one-time: ruff on commit, pytest on push
 uv run pytest             # run tests
 ```
 
