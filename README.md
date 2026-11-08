@@ -1,5 +1,7 @@
 # probable-cause
 
+[![CI](https://github.com/EthanGoodman/probable-cause/actions/workflows/ci.yml/badge.svg?branch=dev)](https://github.com/EthanGoodman/probable-cause/actions/workflows/ci.yml)
+
 An agentic RAG system over NTSB aviation accident data.
 
 Ask questions about US aviation accidents (2019–2024) and get answers grounded in official NTSB records, with a citation to the accident ID for every claim:
@@ -24,6 +26,7 @@ Prerequisites: [Docker](https://docs.docker.com/get-docker/) and [uv](https://do
 cp .env.example .env      # then set POSTGRES_PASSWORD (and API keys when needed)
 docker compose up -d      # start Postgres 16 + pgvector
 uv sync                   # create .venv and install dependencies
+uv run pre-commit install # one-time: ruff on commit, pytest on push
 uv run pytest             # run tests
 ```
 
